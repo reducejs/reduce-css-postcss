@@ -1,0 +1,5 @@
+@import "color";
+.button {
+  background-color: $red;
+  background-image: url(button.png);
+}

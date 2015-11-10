@@ -1,0 +1,87 @@
+var gulp = require('gulp')
+var del = require('del')
+var reduce = require('reduce-css')
+var postcss = require('..')
+var path = require('path')
+var fixtures = path.resolve.bind(path)
+
+gulp.task('clean', function () {
+  return del('build')
+})
+
+gulp.task('single-bundle', ['clean'], function () {
+  return reduce
+    .on('error', console.log.bind(console))
+    .on('log', console.log.bind(console))
+    .on('instance', function (b) {
+      b.plugin(postcss)
+    })
+    .src('*.css', {
+      basedir: fixtures('src'),
+      factor: 'common.css',
+    })
+    .pipe(reduce.dest('build', null, {
+      maxSize: 0,
+      assetOutFolder: fixtures('build', 'images'),
+    }))
+})
+
+gulp.task('watch-single-bundle', ['clean'], function () {
+  reduce.watch()
+    .on('error', console.log.bind(console))
+    .on('log', console.log.bind(console))
+    .on('instance', function (b) {
+      b.plugin(postcss)
+    })
+    .src('*.css', {
+      basedir: fixtures('src'),
+      factor: 'common.css',
+    })
+    .pipe(reduce.dest, 'build', null, {
+      maxSize: 0,
+      assetOutFolder: fixtures('build', 'images'),
+    })
+})
+
+gulp.task('multiple-bundles', ['clean'], function () {
+  return reduce
+    .on('error', console.log.bind(console))
+    .on('log', console.log.bind(console))
+    .on('instance', function (b) {
+      b.plugin(postcss)
+    })
+    .src('*.css', {
+      basedir: fixtures('src'),
+      factor: {
+        needFactor: true,
+        common: 'common.css',
+      },
+    })
+    .pipe(reduce.dest('build', null, {
+      maxSize: 0,
+      useHash: true,
+      assetOutFolder: fixtures('build', 'images'),
+    }))
+})
+
+gulp.task('watch-multiple-bundles', ['clean'], function () {
+  reduce.watch()
+    .on('error', console.log.bind(console))
+    .on('log', console.log.bind(console))
+    .on('instance', function (b) {
+      b.plugin(postcss)
+    })
+    .src('*.css', {
+      basedir: fixtures('src'),
+      factor: {
+        needFactor: true,
+        common: 'common.css',
+      },
+    })
+    .pipe(reduce.dest, 'build', null, {
+      maxSize: 0,
+      useHash: true,
+      assetOutFolder: fixtures('build', 'images'),
+    })
+})
+
