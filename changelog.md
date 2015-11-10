@@ -1,4 +1,10 @@
-<!-- LATEST f199747 -->
+<!-- LATEST 1e72373 -->
+
+## [v1.0.3](https://github.com/zoubin/reduce-css-postcss/commit/1e72373) (2015-11-10)
+
+* [ 2015-11-10 [5db3542](https://github.com/zoubin/reduce-css-postcss/commit/5db3542) ] Update postcss-simple-import to use `on` option
+
+* [ 2015-11-10 [16cb0af](https://github.com/zoubin/reduce-css-postcss/commit/16cb0af) ] CHANGELOG
 
 ## [v1.0.2](https://github.com/zoubin/reduce-css-postcss/commit/f199747) (2015-11-10)
 
