@@ -13,7 +13,6 @@ test('processorFilter, Function', function(t) {
   t.task(clean)
   t.task(function () {
     return bundle(
-      t,
       {
         basedir: fixtures('src'),
         factor: 'common.css',
@@ -30,7 +29,7 @@ test('processorFilter, Function', function(t) {
     compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'single-bundle'))
   })
 
-  function bundle(t, ropts, dest, outOpts, urlOpts) {
+  function bundle(ropts, dest, outOpts, urlOpts) {
     return reduce
       .on('error', console.log.bind(console))
       .on('instance', function (b) {
@@ -54,7 +53,6 @@ test('processorFilter, Array', function(t) {
   t.task(clean)
   t.task(function () {
     return bundle(
-      t,
       {
         basedir: fixtures('src'),
         factor: 'common.css',
@@ -71,7 +69,7 @@ test('processorFilter, Array', function(t) {
     compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'single-bundle'))
   })
 
-  function bundle(t, ropts, dest, outOpts, urlOpts) {
+  function bundle(ropts, dest, outOpts, urlOpts) {
     return reduce
       .on('error', console.log.bind(console))
       .on('instance', function (b) {
