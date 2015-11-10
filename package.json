@@ -31,7 +31,7 @@
     "postcss-mixins": "^2.1.1",
     "postcss-nested": "^1.0.0",
     "postcss-processor-splicer": "^2.0.0",
-    "postcss-simple-import": "^2.0.1"
+    "postcss-simple-import": "^2.1.0"
   },
   "devDependencies": {
     "callback-sequence": "^1.2.1",

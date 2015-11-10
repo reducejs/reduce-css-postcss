@@ -1,6 +1,5 @@
 var Pipeline = require('postcss-processor-splicer')
 var CacheHandler = require('deps-cache')
-var path = require('path')
 
 module.exports = function (b, opts) {
   opts = opts || {}
@@ -31,20 +30,18 @@ module.exports = function (b, opts) {
 
   var cacheHandler = new CacheHandler(cache)
 
-  var importer = atImportOpts.importer
-  atImportOpts.importer = function (id, from, state) {
-    return state.resolve(id, { basedir: path.dirname(from) })
-      .then(function (dep) {
-        cacheHandler.add(from, dep)
-        // watchify reports file rather than `dep`,
-        // so emit dep and make watchify report it
-        b.emit('file', dep)
-        // watch dep
-        state.postcssOpts.entry.emit('file', dep)
-        if (importer) {
-          return importer(id, from, state)
-        }
-      })
+  var on = atImportOpts.on = atImportOpts.on || {}
+  var onImport = on.import
+  on.import = function (dep, from, state) {
+    cacheHandler.add(from, dep)
+    // watchify reports file rather than `dep`,
+    // so emit dep and make watchify report it
+    b.emit('file', dep)
+    // watch dep
+    state.postcssOpts.entry.emit('file', dep)
+    if (onImport) {
+      onImport(dep, from, state)
+    }
   }
 
   // watchify emit `update` whenever file changes detected
