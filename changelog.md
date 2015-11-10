@@ -1,4 +1,10 @@
-<!-- LATEST 024016b -->
+<!-- LATEST f199747 -->
+
+## [v1.0.2](https://github.com/zoubin/reduce-css-postcss/commit/f199747) (2015-11-10)
+
+* [ 2015-11-10 [d00cddc](https://github.com/zoubin/reduce-css-postcss/commit/d00cddc) ] Fix test lint
+
+* [ 2015-11-10 [7bc8c10](https://github.com/zoubin/reduce-css-postcss/commit/7bc8c10) ] CHANGELOG
 
 ## [v1.0.1](https://github.com/zoubin/reduce-css-postcss/commit/024016b) (2015-11-10)
 
