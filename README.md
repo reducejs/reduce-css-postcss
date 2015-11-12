@@ -1,4 +1,4 @@
-# reduce-postcss
+# reduce-css-postcss
 Plugin for [reduce-css](https://github.com/zoubin/reduce-css) to pack postcss modules.
 
 [![npm](https://nodei.co/npm/reduce-css-postcss.png?downloads=true)](https://www.npmjs.org/package/reduce-css-postcss)
