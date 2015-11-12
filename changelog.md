@@ -1,4 +1,19 @@
-<!-- LATEST 1e72373 -->
+<!-- LATEST 6e1fc3e -->
+
+## [v1.0.5](https://github.com/zoubin/reduce-css-postcss/commit/6e1fc3e) (2015-11-12)
+
+* [ 2015-11-12 [bbd863e](https://github.com/zoubin/reduce-css-postcss/commit/bbd863e) ] Fix typo in readme
+
+* [ 2015-11-12 [7b296a4](https://github.com/zoubin/reduce-css-postcss/commit/7b296a4) ] Fix tests
+
+## [v1.0.4](https://github.com/zoubin/reduce-css-postcss/commit/e287fc0) (2015-11-12)
+
+* [ 2015-11-12 [08e3d3f](https://github.com/zoubin/reduce-css-postcss/commit/08e3d3f) ] Update glob and postcss-simple-import
+    
+    > Before postcss-simple-import@2.1.0, `*display:none` in css will be
+    replaced with `display:none`.
+
+* [ 2015-11-10 [fc82392](https://github.com/zoubin/reduce-css-postcss/commit/fc82392) ] CHANGELOG
 
 ## [v1.0.3](https://github.com/zoubin/reduce-css-postcss/commit/1e72373) (2015-11-10)
 
