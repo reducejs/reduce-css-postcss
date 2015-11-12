@@ -1,6 +1,6 @@
 {
   "name": "reduce-css-postcss",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Plugin for reduce-css to pack postcss modules",
   "main": "index.js",
   "scripts": {
