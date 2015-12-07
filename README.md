@@ -1,13 +1,11 @@
 # reduce-css-postcss
-Plugin for [reduce-css](https://github.com/zoubin/reduce-css) to pack postcss modules.
-
-[![npm](https://nodei.co/npm/reduce-css-postcss.png?downloads=true)](https://www.npmjs.org/package/reduce-css-postcss)
-
 [![version](https://img.shields.io/npm/v/reduce-css-postcss.svg)](https://www.npmjs.org/package/reduce-css-postcss)
 [![status](https://travis-ci.org/zoubin/reduce-css-postcss.svg?branch=master)](https://travis-ci.org/zoubin/reduce-css-postcss)
 [![coverage](https://img.shields.io/coveralls/zoubin/reduce-css-postcss.svg)](https://coveralls.io/github/zoubin/reduce-css-postcss)
 [![dependencies](https://david-dm.org/zoubin/reduce-css-postcss.svg)](https://david-dm.org/zoubin/reduce-css-postcss)
 [![devDependencies](https://david-dm.org/zoubin/reduce-css-postcss/dev-status.svg)](https://david-dm.org/zoubin/reduce-css-postcss#info=devDependencies)
+
+Plugin for [reduce-css](https://github.com/zoubin/reduce-css) to pack postcss modules.
 
 ## Example
 
