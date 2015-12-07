@@ -1,4 +1,8 @@
-<!-- 241925b 1449491929000 -->
+<!-- 71aba44 1449491966000 -->
+
+## [v2.0.0](https://github.com/zoubin/reduce-css-postcss/commit/71aba44) (2015-12-07)
+
+* [[`efe7e9a`](https://github.com/zoubin/reduce-css-postcss/commit/efe7e9a)] CHANGLOG
 
 * [[`241925b`](https://github.com/zoubin/reduce-css-postcss/commit/241925b)] Update readme, postcss-mixins
 
