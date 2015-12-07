@@ -9,7 +9,7 @@ gulp.task('clean', function () {
   return del('build')
 })
 
-gulp.task('single-bundle', ['clean'], function () {
+gulp.task('single', ['clean'], function () {
   return reduce
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
@@ -26,8 +26,11 @@ gulp.task('single-bundle', ['clean'], function () {
     }))
 })
 
-gulp.task('watch-single-bundle', ['clean'], function () {
+gulp.task('watch-single', ['clean'], function () {
   reduce.watch()
+    .on('done', function () {
+      console.log('New bundles created!')
+    })
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
     .on('instance', function (b) {
@@ -43,7 +46,7 @@ gulp.task('watch-single-bundle', ['clean'], function () {
     })
 })
 
-gulp.task('multiple-bundles', ['clean'], function () {
+gulp.task('multi', ['clean'], function () {
   return reduce
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
@@ -64,8 +67,11 @@ gulp.task('multiple-bundles', ['clean'], function () {
     }))
 })
 
-gulp.task('watch-multiple-bundles', ['clean'], function () {
+gulp.task('watch-multi', ['clean'], function () {
   reduce.watch()
+    .on('done', function () {
+      console.log('New bundles created!')
+    })
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
     .on('instance', function (b) {

@@ -1,6 +1,8 @@
 var postcss = require('..')
+var test = require('tap').test
 var reduce = require('reduce-css')
-var test = require('tape')
+var run = reduce.run
+var Reduce = reduce.Reduce
 var compare = require('compare-directory')
 var del = require('del')
 var path = require('path')
@@ -9,49 +11,47 @@ var fixtures = path.resolve.bind(path, __dirname, 'fixtures')
 var DEST = fixtures('build')
 
 test('single-bundle', function(t) {
-  t.task(clean)
-  t.task(function () {
-    return bundle(
-      {
+  return run([
+    clean,
+
+    function () {
+      return bundle({
         basedir: fixtures('src'),
         factor: 'common.css',
-      },
-      DEST,
-      null,
-      {
+      }, DEST, null, {
         maxSize: 0,
         assetOutFolder: fixtures('build', 'images'),
-      }
-    )
-  })
-  t.task(function () {
-    compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'single-bundle'))
-  })
+      })
+    },
+
+    function () {
+      compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'single-bundle'))
+    },
+  ])
 })
 
 test('multiple-bundles', function(t) {
-  t.task(clean)
-  t.task(function () {
-    return bundle(
-      {
+  return run([
+    clean,
+
+    function () {
+      return bundle({
         basedir: fixtures('src'),
         factor: {
           needFactor: true,
           common: 'common.css',
         },
-      },
-      DEST,
-      null,
-      {
+      }, DEST, null, {
         maxSize: 0,
         useHash: true,
         assetOutFolder: fixtures('build', 'images'),
-      }
-    )
-  })
-  t.task(function () {
-    compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'multiple-bundles'))
-  })
+      })
+    },
+
+    function () {
+      compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'multiple-bundles'))
+    },
+  ])
 })
 
 function clean() {
@@ -59,7 +59,7 @@ function clean() {
 }
 
 function bundle(ropts, dest, outOpts, urlOpts) {
-  return reduce
+  return Reduce()
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
     .on('instance', function (b) {

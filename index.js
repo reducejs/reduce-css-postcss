@@ -51,15 +51,15 @@ module.exports = function (b, opts) {
   pipeline.splice('postcss-simple-import', 1, atImport)
 
   var processor = pipeline.build()
-  b.processor(function (result) {
+  b.transform(function (result) {
     var postcssOpts = {
       from: result.from,
       to: result.from,
       entry: result,  // for atImport
     }
-    return processor.process(result.css, postcssOpts)
+    return processor.process(result.root, postcssOpts)
       .then(function (res) {
-        result.css = res.css
+        result.root = res.root
       }, function (err) {
         cacheHandler.invalidate(Object.keys(cache))
         throw err

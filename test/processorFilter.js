@@ -1,93 +1,69 @@
 var postcss = require('postcss')
 var reducePostcss = require('..')
 var reduce = require('reduce-css')
-var test = require('tape')
+var test = require('tap').test
 var compare = require('compare-directory')
 var del = require('del')
 var path = require('path')
+var run = reduce.run
+var Reduce = reduce.Reduce
 
 var fixtures = path.resolve.bind(path, __dirname, 'fixtures')
 var DEST = fixtures('build')
 
 test('processorFilter, Function', function(t) {
-  t.task(clean)
-  t.task(function () {
-    return bundle(
-      {
-        basedir: fixtures('src'),
-        factor: 'common.css',
-      },
-      DEST,
-      null,
-      {
-        maxSize: 0,
-        assetOutFolder: fixtures('build', 'images'),
-      }
-    )
-  })
-  t.task(function () {
-    compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'single-bundle'))
-  })
+  return run([
+    clean,
 
-  function bundle(ropts, dest, outOpts, urlOpts) {
-    return reduce
-      .on('error', console.log.bind(console))
-      .on('instance', function (b) {
-        b.plugin(reducePostcss, {
-          processorFilter: function (pipeline) {
-            pipeline.push(postcss.plugin('A', function () {
-              return function () {
-                t.ok(true)
-              }
-            }))
-          },
-        })
-      })
-      .src('*.css', ropts)
-      .pipe(reduce.dest(dest, outOpts, urlOpts))
-  }
+    bundle.bind(null, function (pipeline) {
+      pipeline.push(postcss.plugin('A', function () {
+        return function () {
+          t.ok(true)
+        }
+      }))
+    }),
 
+    check.bind(null, t),
+  ])
 })
 
 test('processorFilter, Array', function(t) {
-  t.task(clean)
-  t.task(function () {
-    return bundle(
-      {
-        basedir: fixtures('src'),
-        factor: 'common.css',
-      },
-      DEST,
-      null,
-      {
-        maxSize: 0,
-        assetOutFolder: fixtures('build', 'images'),
+  return run([
+    clean,
+
+    bundle.bind(null, [postcss.plugin('A', function () {
+      return function () {
+        t.ok(true)
       }
-    )
-  })
-  t.task(function () {
-    compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'single-bundle'))
-  })
+    })]),
 
-  function bundle(ropts, dest, outOpts, urlOpts) {
-    return reduce
-      .on('error', console.log.bind(console))
-      .on('instance', function (b) {
-        b.plugin(reducePostcss, {
-          processorFilter: [postcss.plugin('A', function () {
-            return function () {
-              t.ok(true)
-            }
-          })],
-        })
-      })
-      .src('*.css', ropts)
-      .pipe(reduce.dest(dest, outOpts, urlOpts))
-  }
-
+    check.bind(null, t),
+  ])
 })
 
 function clean() {
   return del(DEST)
+}
+
+function bundle(processorFilter) {
+  return Reduce()
+    .on('error', console.log.bind(console))
+    .on('instance', function (b) {
+      b.plugin(reducePostcss, {
+        processorFilter: processorFilter,
+      })
+    })
+    .src('*.css', {
+      basedir: fixtures('src'),
+      factor: 'common.css',
+    })
+    .pipe(reduce.dest(DEST, null, {
+      maxSize: 0,
+      assetOutFolder: fixtures('build', 'images'),
+    }))
+}
+
+function check(t) {
+  compare(t, ['**/*.css', '**/*.png'], DEST, fixtures('expected', 'single-bundle'))
 }
 
