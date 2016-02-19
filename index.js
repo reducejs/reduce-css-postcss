@@ -1,5 +1,5 @@
-var Pipeline = require('postcss-processor-splicer')
-var CacheHandler = require('deps-cache')
+const Pipeline = require('postcss-processor-splicer')
+const CacheHandler = require('deps-cache')
 
 module.exports = function (b, opts) {
   opts = opts || {}

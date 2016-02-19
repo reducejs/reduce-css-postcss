@@ -1,9 +1,10 @@
 # reduce-css-postcss
 [![version](https://img.shields.io/npm/v/reduce-css-postcss.svg)](https://www.npmjs.org/package/reduce-css-postcss)
-[![status](https://travis-ci.org/zoubin/reduce-css-postcss.svg?branch=master)](https://travis-ci.org/zoubin/reduce-css-postcss)
-[![coverage](https://img.shields.io/coveralls/zoubin/reduce-css-postcss.svg)](https://coveralls.io/github/zoubin/reduce-css-postcss)
-[![dependencies](https://david-dm.org/zoubin/reduce-css-postcss.svg)](https://david-dm.org/zoubin/reduce-css-postcss)
-[![devDependencies](https://david-dm.org/zoubin/reduce-css-postcss/dev-status.svg)](https://david-dm.org/zoubin/reduce-css-postcss#info=devDependencies)
+[![status](https://travis-ci.org/reducejs/reduce-css-postcss.svg?branch=master)](https://travis-ci.org/reducejs/reduce-css-postcss)
+[![coverage](https://img.shields.io/coveralls/reducejs/reduce-css-postcss.svg)](https://coveralls.io/github/reducejs/reduce-css-postcss)
+[![dependencies](https://david-dm.org/reducejs/reduce-css-postcss.svg)](https://david-dm.org/reducejs/reduce-css-postcss)
+[![devDependencies](https://david-dm.org/reducejs/reduce-css-postcss/dev-status.svg)](https://david-dm.org/reducejs/reduce-css-postcss#info=devDependencies)
+![node](https://img.shields.io/node/v/reduce-css-postcss.svg)
 
 Plugin for [reduce-css](https://github.com/zoubin/reduce-css) to pack postcss modules.
 
@@ -12,10 +13,10 @@ Plugin for [reduce-css](https://github.com/zoubin/reduce-css) to pack postcss mo
 See files in the example directory.
 
 ```javascript
+var postcss = require('reduce-css-postcss')
 var gulp = require('gulp')
 var del = require('del')
 var reduce = require('reduce-css')
-var postcss = require('reduce-css-postcss')
 var path = require('path')
 var fixtures = path.resolve.bind(path)
 
@@ -23,7 +24,7 @@ gulp.task('clean', function () {
   return del('build')
 })
 
-gulp.task('single-bundle', ['clean'], function () {
+gulp.task('single', ['clean'], function () {
   return reduce
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
@@ -32,7 +33,7 @@ gulp.task('single-bundle', ['clean'], function () {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: 'common.css',
+      bundleOptions: 'common.css',
     })
     .pipe(reduce.dest('build', null, {
       maxSize: 0,
@@ -40,8 +41,11 @@ gulp.task('single-bundle', ['clean'], function () {
     }))
 })
 
-gulp.task('watch-single-bundle', ['clean'], function () {
+gulp.task('watch-single', ['clean'], function () {
   reduce.watch()
+    .on('done', function () {
+      console.log('New bundles created!')
+    })
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
     .on('instance', function (b) {
@@ -49,7 +53,7 @@ gulp.task('watch-single-bundle', ['clean'], function () {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: 'common.css',
+      bundleOptions: 'common.css',
     })
     .pipe(reduce.dest, 'build', null, {
       maxSize: 0,
@@ -57,7 +61,7 @@ gulp.task('watch-single-bundle', ['clean'], function () {
     })
 })
 
-gulp.task('multiple-bundles', ['clean'], function () {
+gulp.task('multi', ['clean'], function () {
   return reduce
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
@@ -66,8 +70,8 @@ gulp.task('multiple-bundles', ['clean'], function () {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: {
-        needFactor: true,
+      bundleOptions: {
+        groups: '**/+(a|b).css',
         common: 'common.css',
       },
     })
@@ -78,8 +82,11 @@ gulp.task('multiple-bundles', ['clean'], function () {
     }))
 })
 
-gulp.task('watch-multiple-bundles', ['clean'], function () {
+gulp.task('watch-multi', ['clean'], function () {
   reduce.watch()
+    .on('done', function () {
+      console.log('New bundles created!')
+    })
     .on('error', console.log.bind(console))
     .on('log', console.log.bind(console))
     .on('instance', function (b) {
@@ -87,8 +94,8 @@ gulp.task('watch-multiple-bundles', ['clean'], function () {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: {
-        needFactor: true,
+      bundleOptions: {
+        groups: '**/+(a|b).css',
         common: 'common.css',
       },
     })

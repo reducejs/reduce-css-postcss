@@ -4,13 +4,13 @@
   "description": "Plugin for reduce-css to pack postcss modules",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && tap --cov test/*.js",
+    "test": "npm run lint && tap test/*.js",
     "lint": "eslint *.js 'lib/**/*.js' test/*.js bin/*.js",
-    "coveralls": "COVERALLS_REPO_TOKEN=KfDtZaE5IHPtRZVkKP2Mw9BmYRo5yZ0dg npm test"
+    "coveralls": "COVERALLS_REPO_TOKEN=cp61jDv8Fdr9G5udGNIv6F3ux9xjAupxa tap --cov test/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zoubin/reduce-css-postcss.git"
+    "url": "git+https://github.com/reducejs/reduce-css-postcss.git"
   },
   "keywords": [
     "postcss",
@@ -19,29 +19,32 @@
   ],
   "author": "zoubin",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zoubin/reduce-css-postcss/issues"
+  "engines": {
+    "node": ">=4.2.1"
   },
-  "homepage": "https://github.com/zoubin/reduce-css-postcss#readme",
+  "bugs": {
+    "url": "https://github.com/reducejs/reduce-css-postcss/issues"
+  },
+  "homepage": "https://github.com/reducejs/reduce-css-postcss#readme",
   "dependencies": {
     "autoprefixer": "^6.0.3",
-    "deps-cache": "^1.0.0",
+    "deps-cache": "^2.0.0",
     "postcss": "^5.0.10",
     "postcss-advanced-variables": "^1.2.2",
-    "postcss-custom-url": "^3.0.0",
+    "postcss-custom-url": "^4.0.0",
     "postcss-extend": "^1.0.1",
-    "postcss-mixins": "^3.0.0",
+    "postcss-mixins": "^4.0.0",
     "postcss-nested": "^1.0.0",
-    "postcss-processor-splicer": "^2.0.0",
-    "postcss-simple-import": "^2.1.3"
+    "postcss-processor-splicer": "^3.0.0",
+    "postcss-simple-import": "^3.0.0"
   },
   "devDependencies": {
     "compare-directory": "^1.0.0",
     "del": "^2.0.2",
-    "eslint": "^1.10.1",
+    "eslint": "^2.1.0",
     "gulp": "^3.9.0",
     "mixy": "^1.0.0",
-    "reduce-css": "^2.0.0",
-    "tap": "^2.3.1"
+    "reduce-css": "^4.0.0",
+    "tap": "^5.0.0"
   }
 }

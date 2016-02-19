@@ -17,7 +17,7 @@ test('single-bundle', function(t) {
     function () {
       return bundle({
         basedir: fixtures('src'),
-        factor: 'common.css',
+        bundleOptions: 'common.css',
       }, DEST, null, {
         maxSize: 0,
         assetOutFolder: fixtures('build', 'images'),
@@ -37,8 +37,8 @@ test('multiple-bundles', function(t) {
     function () {
       return bundle({
         basedir: fixtures('src'),
-        factor: {
-          needFactor: true,
+        bundleOptions: {
+          groups: '**/+(a|b).css',
           common: 'common.css',
         },
       }, DEST, null, {

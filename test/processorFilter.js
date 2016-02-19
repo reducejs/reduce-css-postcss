@@ -55,7 +55,7 @@ function bundle(processorFilter) {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: 'common.css',
+      bundleOptions: 'common.css',
     })
     .pipe(reduce.dest(DEST, null, {
       maxSize: 0,

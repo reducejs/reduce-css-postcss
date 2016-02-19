@@ -18,7 +18,7 @@ gulp.task('single', ['clean'], function () {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: 'common.css',
+      bundleOptions: 'common.css',
     })
     .pipe(reduce.dest('build', null, {
       maxSize: 0,
@@ -38,7 +38,7 @@ gulp.task('watch-single', ['clean'], function () {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: 'common.css',
+      bundleOptions: 'common.css',
     })
     .pipe(reduce.dest, 'build', null, {
       maxSize: 0,
@@ -55,8 +55,8 @@ gulp.task('multi', ['clean'], function () {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: {
-        needFactor: true,
+      bundleOptions: {
+        groups: '**/+(a|b).css',
         common: 'common.css',
       },
     })
@@ -79,8 +79,8 @@ gulp.task('watch-multi', ['clean'], function () {
     })
     .src('*.css', {
       basedir: fixtures('src'),
-      factor: {
-        needFactor: true,
+      bundleOptions: {
+        groups: '**/+(a|b).css',
         common: 'common.css',
       },
     })
